@@ -2,10 +2,11 @@ const pagarme = require('pagarme');
 
 module.exports = {
     async index (req, res){
+        //conectando com a api
         const client = await pagarme.client.connect({
             api_key: 'ak_test_5k0EU9BhrLnnoWbS1HKqIbcnu8q3Qf'
         });
-    
+        //criando a trasanção, esperando receber postback
         try{
           const pagarmeTransaction = await client.transactions.create({
                 amount : 1000,
@@ -88,7 +89,7 @@ module.exports = {
         const client = await pagarme.client.connect({
             api_key: 'ak_test_5k0EU9BhrLnnoWbS1HKqIbcnu8q3Qf'
         });
-
+        //buscando uma transação por ID
         const transaction = await client.postbacks.find({
             transactionId: 7569966,
         });
@@ -102,7 +103,7 @@ module.exports = {
         const client = await pagarme.client.connect({
             api_key: 'ak_test_5k0EU9BhrLnnoWbS1HKqIbcnu8q3Qf'
         });
-
+        // buscando todos os cartões cadastrados para realizar as trasações dos clientes
         const transaction = await client.cards.all();
 
         return res.json(transaction);
